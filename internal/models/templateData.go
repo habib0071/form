@@ -1,8 +1,8 @@
-package model
+package models
 
 import "github.com/habib0071/goLang/internal/forms"
 
-//TemplateData holds data sent handler to templates
+// TemplateData holds data sent from handlers to templates
 type TemplateData struct {
 	StringMap map[string]string
 	IntMap    map[string]int

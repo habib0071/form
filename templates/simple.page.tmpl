@@ -10,29 +10,35 @@
     </head>
     <body>
         <div class="container">
-            <form action="/simple-form" method="post" id="form">
+            {{$res := index .Data "reservation"}}
+            <form action="/post-simple" method="post" id="form">
             <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
-            
                 <h1>Register</h1>
                 <div class="input-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" />
-                    <div class="error"></div>
+                    {{with .Form.Errors.Get "username"}}
+                        <label class="text-denger">{{.}}</label>
+                    {{end}}
+                    <input class="form-control {{with.Form.Errors.Get "username"}} is-invalid {{end}}" type="text" id="username" name="username" value="{{$res.username}}"/>
+                    <div class=""></div>
                 </div>
                 <div class="input-group">
                     <label for="email">Email</label>
-                    <input type="text" id="email" name="email" />
-                    <div class="error"></div>
+                    {{with .Form.Errors.Get "email"}}
+                        <label class="text-denger">{{.}}</label>
+                    {{end}}
+                    <input class="form-control {{with.Form.Errors.Get "email"}} is-invalid {{end}}" id="email" type="text" id="email" name="email" name='email' value="{{$res.email}} "/>
+                    <div class=""></div>
                 </div>
                 <div class="input-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" />
-                    <div class="error"></div>
+                    <div class=""></div>
                 </div>
                 <div class="input-group">
                     <label for="cpassword">Confirm Password</label>
                     <input type="password" id="cpassword" name="cpassword" />
-                    <div class="error"></div>
+                    <div class=""></div>
                 </div>
                 <button type="submit">Register</button>
             </form>
