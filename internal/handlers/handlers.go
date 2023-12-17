@@ -30,7 +30,9 @@ func NewHandler(r *Repository) {
 }
 
 func (m *Repository) Simple(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "simple.page.tmpl", &model.TemplateData{})
+	render.RenderTemplate(w, "simple.page.tmpl", &model.TemplateData{
+		Form: forms.New(nil),
+	})
 }
 
 func (m *Repository) PostSimple(w http.ResponseWriter, r *http.Request) {
@@ -41,14 +43,14 @@ func (m *Repository) PostSimple(w http.ResponseWriter, r *http.Request) {
 	}
 
 	simpleInformation := model.SimpleInformation{
-		UserName: r.Form.Get("username"),
-		Email: r.Form.Get("email"),
-		Password: r.Form.Get("password"),
+		UserName:  r.Form.Get("username"),
+		Email:     r.Form.Get("email"),
+		Password:  r.Form.Get("password"),
 		Cpassword: r.Form.Get("cpassword"),
 	}
 	form := forms.New(r.PostForm)
 
-	form.Has("full_name", r)
+	form.Has("username", r)
 
 	if form.Valid() {
 		data := make(map[string]interface{})

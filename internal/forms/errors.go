@@ -1,8 +1,5 @@
 package forms
 
-import (
-	
-)
 
 type errors map[string][]string
 

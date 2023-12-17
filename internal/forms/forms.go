@@ -1,6 +1,7 @@
 package forms
 
 import (
+	"crypto/internal/edwards25519/field"
 	"net/http"
 	"net/url"
 )
@@ -26,6 +27,7 @@ func New(data url.Values) *Form {
 func (f *Form) Has(feild string, r *http.Request) bool {
 	x := r.Form.Get(feild)
 	if x == "" {
+		f.Errors.Add(feild, "This filed cannot be blank")
 		return false
 	}
 	return true
